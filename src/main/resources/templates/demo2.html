@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>我的生活</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+    <script type="text/javascript">
+        if (/Android (\d+\.\d+)/.test(navigator.userAgent)) {
+            var version = parseFloat(RegExp.$1);
+            if (version > 2.3) {
+                var phoneScale = parseInt(window.screen.width) / 640;
+                document.write('<meta name="viewport" content="width=640, minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">');
+            } else {
+                document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+            }
+        } else {
+            document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+        }
+    </script>
+    <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<form name="form" id="formsubmit" method="POST" enctype="multipart/form-data">
+    <div class="upload-btn btn-new">
+        <input type="file" id="file" name="file">
+    </div>
+
+    <input type="button" class="submit" onclick="formsub()"/>
+</form>
+<script type="text/javascript" src="./js/iscroll-zoom.js"></script>
+<script type="text/javascript" src="./js/script.js"></script>
+<!-- 默认必须要执行$.init(),实际业务里一般不会在HTML文档里执行，通常是在业务页面代码的最后执行 -->
+<script>
+    $(function () {
+        $.init()
+    })
+
+    function formsub() {
+        var file = new FormData($("#formsubmit")[0]);
+        $.ajax({
+            url: '/car/index',
+            type: "post",
+            data: file,
+            cache: false,
+            async: false,
+            contentType: false, //必须
+            processData: false, //必须
+            success: function (data) {
+                alert(data.result[0].name)
+            },
+            error: function (data) {
+            }
+        });
+    }
+
+</script>
+
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+
+</body>
+</html>
